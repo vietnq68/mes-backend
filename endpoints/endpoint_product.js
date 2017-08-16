@@ -1,20 +1,20 @@
 var Product = require('../models/product');
+
+
 var productEndpoint = {
-  list : function(req,res) {
-    return Product.find({},function(err,products) {
-      return res.json(products);
-    });
+
+  test: function(req,res) {
+    return res.json('Test')
   },
 
-  create: function(req,res) {
-    var product = new Product();
-    product.status = req.body.status;
-    product.prevWorkstation = req.body.prevWorkstation;
-
-    return product.save(function(err,doc) {
-      return res.json(doc);
-    })
+  router: function() {
+    var router = require('./router_factory')(Product);
+    
+    router.get('/test',this.test);
+    
+    return router;
   }
 }
+
 
 module.exports = productEndpoint;

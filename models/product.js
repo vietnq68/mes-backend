@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 var productSchema = new Schema({
   status: Boolean,
-  prevWorkstation: Number
+  next_wrkstn_id: Schema.Types.ObjectId,
+  checked_at_next: Boolean,
 });
 
 productSchema.methods = {

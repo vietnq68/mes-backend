@@ -1,16 +1,11 @@
 var express = require('express');
-var router = express.Router();
-var Product = require('../models/product')
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  product = new Product({
-    status: true,
-    prevWorkstation: 1
-  })
-  product.save(err=>{
-    if (err) console.log(err);
-  })
-  res.render('index', { title: 'Express' });
-});
 
-module.exports = router;
+var productEndpoint  = require('../endpoints/endpoint_product')
+var workstationEndpoint = require('../endpoints/endpoint_workstation')
+
+//Router
+module.exports = function(app) {
+	app.use('/products',productEndpoint.router());
+	app.use('/workstations',workstationEndpoint.router());
+	return app;	
+}
