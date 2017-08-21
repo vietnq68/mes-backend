@@ -4,11 +4,21 @@ var express = require('express');
 module.exports = function(model) {
 	var router = express.Router();
 	var modelName = model.modelName.toLowerCase();
-	
+
 	router.get('/',function(req,res) {
 		console.log(req.app.get('socketio'));
 		var io = req.app.get('socketio');
 		io.emit('mes_test_event','Hello MES');
+		var filter = {}
+		for (var key in req.query) {
+    	var value = req.query[key];
+			filter[key] = value
+		}
+		if (Object.keys(filter).length  > 0){
+			return model.findOne(filter,function(err,instance){
+				return res.json(instance);
+			})
+		}
 		return model.find({}).then(function(data){
 			return res.json(data);
 		})
@@ -51,6 +61,6 @@ module.exports = function(model) {
 			return res.status(200).end();
 		})
 	})
-			
+
 	return router;
 }

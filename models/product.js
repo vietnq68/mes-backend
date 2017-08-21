@@ -5,6 +5,7 @@ var productSchema = new Schema({
   status: Boolean,
   next_wrkstn_id: Schema.Types.ObjectId,
   checked_at_next: Boolean,
+  pcb_id: String,
 },{strict: false});
 
 productSchema.methods = {

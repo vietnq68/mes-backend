@@ -7,9 +7,17 @@ module.exports = function() {
   			io.emit('finished_product_event','finish product');
   			return res.json("OK");
   		},
+
+			errorProduct: function(req,res) {
+  			var io = req.app.get('socketio');
+  			io.emit('error_product_event','error product');
+  			return res.json("OK");
+  		},
+
   		router: function() {
    			var router = require('./router_factory')(Product);
    			router.post('/:id/finished',this.finishProduct);
+				router.post('/:id/error',this.errorProduct);
     		return router;
   		}
 	}
