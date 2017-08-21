@@ -6,6 +6,9 @@ module.exports = function(model) {
 	var modelName = model.modelName.toLowerCase();
 	
 	router.get('/',function(req,res) {
+		console.log(req.app.get('socketio'));
+		var io = req.app.get('socketio');
+		io.emit('mes_test_event','Hello MES');
 		return model.find({}).then(function(data){
 			return res.json(data);
 		})
