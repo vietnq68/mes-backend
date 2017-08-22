@@ -15,16 +15,21 @@ module.exports = function() {
   		},
 
 			passWorkstation: function(req,res) {
-				var io = req.app.get('socketio');
-				io.emit('update_event',req.body);
-				return res.json("OK");
+				var filter = {}
+				filter['_id'] = req.params.id;
+				data = req.body;
+				return model.findOne(filter,function(err,instance) {
+					var io = req.app.get('socketio');
+					io.emit('update_event',instance);
+					return res.json("OK");
+				})
   		},
 
   		router: function() {
    			var router = require('./router_factory')(Product);
    			router.post('/:id/finished',this.finishProduct);
 				router.post('/:id/error',this.errorProduct);
-				router.put('/:id/pass_wrkstn',this.passWorkstation);
+				router.post('/:id/pass_wrkstn',this.errorProduct);
     		return router;
   		}
 	}
