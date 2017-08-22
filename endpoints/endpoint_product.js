@@ -29,7 +29,7 @@ module.exports = function() {
    			var router = require('./router_factory')(Product);
    			router.post('/:id/finished',this.finishProduct);
 				router.post('/:id/error',this.errorProduct);
-				router.post('/:id/pass_wrkstn',this.passWorkstation);
+				router.put('/:id/pass_wrkstn',this.passWorkstation);
     		return router;
   		}
 	}
