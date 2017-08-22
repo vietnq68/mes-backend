@@ -6,9 +6,6 @@ module.exports = function(model) {
 	var modelName = model.modelName.toLowerCase();
 
 	router.get('/',function(req,res) {
-		console.log(req.app.get('socketio'));
-		var io = req.app.get('socketio');
-		io.emit('mes_test_event','Hello MES');
 		var filter = {}
 		for (var key in req.query) {
     	var value = req.query[key];
@@ -44,7 +41,7 @@ module.exports = function(model) {
 		data = req.body;
 		return model.findOne(filter,function(err,instance) {
 			for(var attr in data) {
-				if(data.hasOwnProperty(attr) && attr!=='_id') {
+				if(attr!=='_id') {
 					instance[attr] = data[attr];
 				}
 			}
