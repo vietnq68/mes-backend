@@ -15,14 +15,9 @@ module.exports = function() {
   		},
 
 			passWorkstation: function(req,res) {
-				var filter = {}
-				filter['_id'] = req.params.id;
-				data = req.body;
-				return model.findOne(filter,function(err,instance) {
 					var io = req.app.get('socketio');
-					io.emit('update_event',instance);
+					io.emit('update_event',req.body);
 					return res.json("OK");
-				})
   		},
 
   		router: function() {
