@@ -28,18 +28,18 @@ module.exports = function() {
 
 			paretoChart: function(req,res) {
 				return Reason.find({}).then(function(data){
-					var paretoData ={}
-					var value = []
-					var label = []
-					for (var d in data){
-						value.push(data[d]['count'])
-						label.push(data[d]['name'])
-					}
-					paretoData['value'] = value
-					paretoData['label'] = label
-					console.log(paretoData)
+					// var paretoData ={}
+					// var value = []
+					// var label = []
+					// for (var d in data){
+					// 	value.push(data[d]['count'])
+					// 	label.push(data[d]['name'])
+					// }
+					// paretoData['value'] = value
+					// paretoData['label'] = label
+					// console.log(paretoData)
 					var io = req.app.get('socketio');
-					io.emit('paretoChart',paretoData);
+					io.emit('paretoChart',data);
 					return res.json("OK");
 				})
 				// return res.json("OK");

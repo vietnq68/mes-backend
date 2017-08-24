@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var productSchema = new Schema({
-  status: Boolean,
+  status: String,
   current_wrkstn_id:Schema.Types.ObjectId,
   next_wrkstn_id: Schema.Types.ObjectId,
   checked_at_next: Boolean,
