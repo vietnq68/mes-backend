@@ -9,6 +9,7 @@ var productSchema = new Schema({
   pcb_id: String,
   scan_time: Date,
   error_reason:Schema.Types.ObjectId,
+  process:String,
 },{strict: false});
 
 productSchema.methods = {
